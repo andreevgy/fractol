@@ -6,21 +6,21 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/20 14:27:59 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/07 16:09:00 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 17:58:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	set_pixel_to_image(char *data_addr, int size_line, int x, int y)
+void	set_pixel_to_image(char *data_addr, int size_line, t_pixel *pixel)
 {
 	int *image;
 
 	image = (int *)data_addr;
-	if (x >= 0 && x < WINDOW_WIDTH &&
-			y >= 0 && y < WINDOW_HEIGHT)
+	if (pixel->x >= 0 && pixel->x < WINDOW_WIDTH &&
+			pixel->y >= 0 && pixel->y < WINDOW_HEIGHT)
 	{
-		image[(size_line / 4) * y + x] = 0xFFFFFF;
+		image[(size_line / 4) * pixel->y + pixel->x] = pixel->color;
 	}
 }
 
