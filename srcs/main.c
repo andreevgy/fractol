@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 14:29:20 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/09 19:34:00 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/09 19:36:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	draw_on_update(t_fract *fractal)
 
 int	print_usage(void)
 {
-	ft_putendl("usage:\n\t./fractol [mandelbroot, julia, burningship]");
+	ft_putendl("usage: ./fractol [mandelbroot, julia, burningship]");
 	return (0);
 }
 
