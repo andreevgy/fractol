@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/fractol",
-            "args": [],
+            "args": ["julia"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

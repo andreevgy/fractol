@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/08 17:22:13 by marvin            #+#    #+#              #
-#    Updated: 2019/02/09 18:41:35 by marvin           ###   ########.fr        #
+#    Updated: 2019/02/09 19:31:56 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ clean:
 		make clean -C ./libft
 		rm -f $(RAW_OFILES)
 
-fclean: clean 
+fclean: clean
 		make clean -C ./minilibx_macos
 		make fclean -C ./libft
 		rm -rf $(NAME)

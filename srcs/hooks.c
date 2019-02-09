@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:10:43 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/09 19:04:25 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/09 19:18:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	key_press(int keycode, t_fract *fractol)
 	if (keycode == 69)
 		fractol->max_iters += 200;
 	if (keycode == 78)
-		if (fractol->max_iters > 400)
+		if (fractol->max_iters >= 400)
 			fractol->max_iters -= 200;
 	return (0);
 }

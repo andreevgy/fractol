@@ -15,9 +15,10 @@
                 "kind": "test",
                 "isDefault": true
             },
+            "args": ["mandelbroot"],
             "type": "shell",
             "dependsOn": "build",
             "command": "./fractol"
         }
     ]
-} 
+}
