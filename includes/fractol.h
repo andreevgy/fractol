@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 15:16:23 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/09 18:40:45 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/09 19:06:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <math.h>
 # include "libft.h"
 
-# define WINDOW_WIDTH 1200
-# define WINDOW_HEIGHT 700
+# define W 1200
+# define H 700
 
 typedef	struct	s_fract
 {
