@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:10:43 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/09 19:45:31 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/09 20:11:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int	key_press(int keycode, t_fract *fractol)
 	if (keycode == 69)
 		fractol->max_iters += 5;
 	if (keycode == 126)
-		fractol->move->x += 10;
-	if (keycode == 127)
-		fractol->move->y -= 10;
+		(fractol->move)->i -= 0.1 / fractol->zoom;
+	if (keycode == 125)
+		(fractol->move)->i += 0.1 / fractol->zoom;
 	if (keycode == 124)
-		fractol->move->y += 10;
+		(fractol->move)->real += 0.1 / fractol->zoom;
 	if (keycode == 123)
-		fractol->move->y -= 10;
+		(fractol->move)->real -= 0.1 / fractol->zoom;
 	if (keycode == 78)
 		if (fractol->max_iters >= 10)
 			fractol->max_iters -= 5;
@@ -44,9 +44,9 @@ int	mouse_release(int button, int x, int y, t_fract *fract)
 	(void)y;
 	fract->updated = 1;
 	if (button == 4)
-		fract->zoom++;
+		fract->zoom += 1;
 	if (button == 5 && fract->zoom > 1)
-		fract->zoom--;
+		fract->zoom -= 1;
 	return (0);
 }
 

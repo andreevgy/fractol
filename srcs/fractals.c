@@ -6,20 +6,20 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 13:18:23 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/09 19:47:36 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/09 20:11:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	julia(t_pixel *pixel, int zoom, int max_iters, t_pixel *move)
+int	julia(t_pixel *pixel, int zoom, int max_iters, t_complex *move)
 {
 	t_complex	*new;
 	t_complex	*old;
 	int			i;
 
-	new = create_complex(1.5 * (pixel->x - W / 2) / (0.5 * zoom * W) + move->x,
-							(pixel->y - H / 2) / (0.5 * zoom * H)) + move->y;
+	new = create_complex(1.5 * (pixel->x - W / 2) / (0.5 * zoom * W) + move->real,
+							(pixel->y - H / 2) / (0.5 * zoom * H) + move->i);
 	old = create_complex(new->real, new->i);
 	i = 0;
 	while (i < max_iters)
@@ -37,15 +37,15 @@ int	julia(t_pixel *pixel, int zoom, int max_iters, t_pixel *move)
 	return (i);
 }
 
-int	mandelbroot(t_pixel *pixel, int zoom, int max_iters, t_pixel *move)
+int	mandelbroot(t_pixel *pixel, int zoom, int max_iters, t_complex *move)
 {
 	t_complex	*new;
 	t_complex	*old;
 	t_complex	*c;
 	int			i;
 
-	c = create_complex(1.5 * (pixel->x - W / 2) / (0.5 * zoom * W) + move->x,
-							(pixel->y - H / 2) / (0.5 * zoom * H)) + move->y;
+	c = create_complex(1.5 * (pixel->x - W / 2) / (0.5 * zoom * W) + move->real,
+							(pixel->y - H / 2) / (0.5 * zoom * H) + move->i);
 	new = create_complex(0, 0);
 	old = create_complex(0, 0);
 	i = 0;
@@ -65,15 +65,15 @@ int	mandelbroot(t_pixel *pixel, int zoom, int max_iters, t_pixel *move)
 	return (i);
 }
 
-int	burningship(t_pixel *pixel, int zoom, int max_iters, t_pixel *move)
+int	burningship(t_pixel *pixel, int zoom, int max_iters, t_complex *move)
 {
 	int			i;
 	t_complex	*c;
 	t_complex	*new;
 	t_complex	*old;
 
-	c = create_complex(1.5 * (-(pixel->x) + W / 2) / (0.5 * zoom * W) + move->x,
-						(-(pixel->y) + H / 2) / (0.5 * zoom * H)) + move->y;
+	c = create_complex(1.5 * (-(pixel->x) + W / 2) / (0.5 * zoom * W) + move->real,
+						(-(pixel->y) + H / 2) / (0.5 * zoom * H) + move->i);
 	new = create_complex(0, 0);
 	old = create_complex(0, 0);
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 15:16:23 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/09 19:50:20 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/09 20:04:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ typedef	struct	s_fract
 	int			zoom;
 	int			updated;
 	int			max_iters;
-	t_pixel		*move;
-	int 		(*calc)(t_pixel *pixel, int zoom, int max_iters, t_pixel *move);
+	t_complex	*move;
+	int 		(*calc)(t_pixel *pixel, int zoom, int max_iters, t_complex *move);
 }				t_fract;
 
 typedef struct s_thread_args
@@ -65,9 +65,9 @@ t_complex	*create_complex(double real, double i);
 void 		draw_fract(t_fract *fract);
 int			key_release(int keycode, void *param);
 t_pixel		*create_pixel(int x, int y, int color);
-int			julia(t_pixel *pixel, int zoom, int max_iters, t_pixel *move);
-int			mandelbroot(t_pixel *pixel, int zoom, int max_iters, t_pixel *move);
-int			burningship(t_pixel *pixel, int zoom, int max_iters, t_pixel *move);
+int			julia(t_pixel *pixel, int zoom, int max_iters, t_complex *move);
+int			mandelbroot(t_pixel *pixel, int zoom, int max_iters, t_complex *move);
+int			burningship(t_pixel *pixel, int zoom, int max_iters, t_complex *move);
 int			mouse_release(int button, int x, int y, t_fract *fract);
 int			key_press(int keycode, t_fract *fractol);
 void		calculate_pixel(t_fract *fract, int (*calc)(t_pixel *pixel, int zoom, int max_iters, t_pixel *move), t_pixel *pixel);
