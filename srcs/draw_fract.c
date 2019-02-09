@@ -6,48 +6,46 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 15:48:20 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/07 18:00:52 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/09 18:21:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <stdio.h>
 
-void calculate_pixel(char *data_addr, int size_line, t_pixel *pixel)
-{   
-    t_complex   *new;
-    t_complex   *old;
-    int         i;
-
-    new = create_complex(1.5 * (pixel->x - WINDOW_WIDTH / 2) / (0.5 * WINDOW_WIDTH), (pixel->y - WINDOW_HEIGHT / 2) / (0.5 * WINDOW_HEIGHT));
-    i = 0;
-    while (i < 200)
-    {
-        old = create_complex(new->real, new->i);
-        new->real = old->real * old->real - old->i * old->i - 0.7;
-        new->i = 2 * old->real * old->i + 0.27015;
-        if (new->real * new->real + new->i * new->i > 4)
-            break;
-        i++;
-    }
-    if (i > 100)
-    {   
-        set_pixel_to_image(data_addr, size_line, pixel);
-    }
+int     hsv(int h, int s, int v)
+{
+    float   hh;
+    float   ff;
+    int     p;
+    int     q;
+    int     t;
+    if (s == 0)
+        return ((v << 16) | (v << 8) | v);
+    hh = ((h >= 360) ? 0 : (float)h / 60.0);
+    ff = hh - (int)hh;
+    p = (float)v * (1.0 - (float)s / 255.0);
+    q = (float)v * (1.0 - ((float)s / 255.0 * ff));
+    t = (float)v * (1.0 - ((float)s / 255.0 * (1.0 - ff)));
+    if ((int)hh == 0)
+        return ((v << 16) | (t << 8) | p);
+    else if ((int)hh == 1)
+        return ((q << 16) | (v << 8) | p);
+    else if ((int)hh == 2)
+        return ((p << 16) | (v << 8) | t);
+    else if ((int)hh == 3)
+        return ((p << 16) | (q << 8) | v);
+    else if ((int)hh == 4)
+        return ((t << 16) | (p << 8) | v);
+    else
+        return ((v << 16) | (p << 8) | q);
 }
 
-void draw_fract(t_fract *fract)
-{
-    t_pixel *iter;
-    iter = create_pixel(0, 0, 0);
+void calculate_pixel(t_fract *fract, int (*calc)(t_pixel *pixel, int zoom, int max_iters), t_pixel *pixel)
+{   
+    int         iters;
 
-    while (iter->y < WINDOW_HEIGHT)
-    {
-        iter->x = 0;
-        while (iter->x < WINDOW_WIDTH)
-        {
-            calculate_pixel(fract->data_addr, fract->size_line, iter);
-            iter->x++;
-       }
-       iter->y++;
-    }
+    iters = calc(pixel, fract->zoom, fract->max_iters);
+    pixel->color = hsv(iters % 60 + 120, iters % 255, 255 * (iters < fract->max_iters));
+    set_pixel_to_image(fract->data_addr, fract->size_line, pixel);
 }

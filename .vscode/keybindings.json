@@ -1,0 +1,5 @@
+[{
+    "key": "shift+cmd+v",
+    "command": "workbench.action.tasks.test",
+    "when": "editorTextFocus"
+}]
