@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 15:16:23 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/12 13:00:22 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/12 14:16:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef	struct	s_fract
 	int			zoom;
 	int			updated;
 	int			max_iters;
+	int			pixels[H][W];
 	t_complex	*move;
 	int 		(*calc)(t_pixel *pixel, int zoom, int max_iters, t_complex *move);
 }				t_fract;

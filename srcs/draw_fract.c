@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 15:48:20 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/12 13:00:13 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/12 14:18:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	calculate_pixel(t_fract *fract, int (*calc)(t_pixel *pixel,
 	int iters;
 
 	iters = calc(pixel, fract->zoom, fract->max_iters, fract->move);
-	pixel->color = hsv(iters % 60 + 120, iters % 255,
-						255 * (iters < fract->max_iters));
-	set_pixel_to_image(fract->data_addr, fract->size_line, pixel);
+	fract->pixels[pixel->y][pixel->x] = iters;
+	//pixel->color = hsv(iters % 60 + 120, iters % 255, 255 * (iters < fract->max_iters));
+	//set_pixel_to_image(fract->data_addr, fract->size_line, pixel);
 }
