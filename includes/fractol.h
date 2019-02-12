@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 15:16:23 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/09 20:04:17 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/12 13:00:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int			mandelbroot(t_pixel *pixel, int zoom, int max_iters, t_complex *move);
 int			burningship(t_pixel *pixel, int zoom, int max_iters, t_complex *move);
 int			mouse_release(int button, int x, int y, t_fract *fract);
 int			key_press(int keycode, t_fract *fractol);
-void		calculate_pixel(t_fract *fract, int (*calc)(t_pixel *pixel, int zoom, int max_iters, t_pixel *move), t_pixel *pixel);
+void		calculate_pixel(t_fract *fract, int (*calc)(t_pixel *pixel, int zoom, int max_iters, t_complex *move), t_pixel *pixel);
 int			hsv(int h, int s, int v);
 void		calculate_zone(t_fract *fractal, t_pixel *start, t_pixel *end);
 

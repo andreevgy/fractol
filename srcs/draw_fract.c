@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 15:48:20 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/09 19:49:44 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/12 13:00:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		hsv(int h, int s, int v)
 }
 
 void	calculate_pixel(t_fract *fract, int (*calc)(t_pixel *pixel,
-						int zoom, int max_iters, t_pixel *move), t_pixel *pixel)
+						int zoom, int max_iters, t_complex *move), t_pixel *pixel)
 {
 	int iters;
 
