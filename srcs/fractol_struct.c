@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 15:27:09 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/12 14:20:53 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/12 18:36:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_fract	*create_fractol(char *name)
 	fractol->img_ptr = create_new_image(fractol);
 	fractol->updated = 1;
 	fractol->zoom = 1;
-	fractol->max_iters = 100;
+	fractol->max_iters = 200;
 	fractol->move = create_complex(0, 0);
 	if (!ft_strcmp(name, "mandelbroot"))
 		fractol->calc = &mandelbroot;

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:10:43 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/09 20:11:20 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/12 20:24:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	mouse_release(int button, int x, int y, t_fract *fract)
 	(void)y;
 	fract->updated = 1;
 	if (button == 4)
-		fract->zoom += 1;
+		fract->zoom *= 2;
 	if (button == 5 && fract->zoom > 1)
-		fract->zoom -= 1;
+		fract->zoom /= 2;
 	return (0);
 }
 

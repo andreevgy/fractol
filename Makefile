@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/08 17:22:13 by marvin            #+#    #+#              #
-#    Updated: 2019/02/09 19:31:56 by marvin           ###   ########.fr        #
+#    Updated: 2019/02/12 19:23:23 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,13 @@ NAME        = fractol
 FLAGS       = -Wall -Wextra -Werror -O0 -g
 SRC_DIR		= ./srcs
 OBJ_DIR		= ./obj
-CFILES		= main.c fractol_struct.c image.c complex.c draw_fract.c hooks.c pixel.c fractals.c calculate_zone.c
+CFILES		= main.c fractol_struct.c image.c complex.c draw_fract.c hooks.c pixel.c fractals.c calculate_zone.c threads.c
 OFILES		= $(CFILES:.c=.o)
 RAW_CFILES	= $(addprefix $(SRC_DIR)/,$(CFILES))
 RAW_OFILES	= $(addprefix $(OBJ_DIR)/,$(OFILES))
 
 all: $(OBJ_DIR) $(NAME)
+
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 

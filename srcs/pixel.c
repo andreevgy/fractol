@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 17:50:55 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/09 19:05:45 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/12 18:17:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,3 +22,4 @@ t_pixel	*create_pixel(int x, int y, int color)
 	pixel->color = color;
 	return (pixel);
 }
+

@@ -6,12 +6,31 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 13:07:47 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/12 13:46:57 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/12 20:35:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <stdio.h>
+
+
+void calculate_each_pixel(t_fract *fract, t_pixel start, t_pixel end)
+{
+	t_pixel *iter;
+
+	iter = create_pixel(start.x, start.y, 0);
+	while (iter->y < end.y)
+	{
+		iter->x = start.x;
+		while (iter->x < end.x)
+		{
+			calculate_pixel(fract, fract->calc, *iter);
+			iter->x++;
+		}
+		iter->y++;
+	}
+}
+
 
 void	*calculate_zone_thread(void *param)
 {
@@ -19,10 +38,11 @@ void	*calculate_zone_thread(void *param)
 
 	args = (t_thread_args *)param;
 	calculate_zone(args->fract, args->start, args->end);
-	return (NULL);
+	//calculate_each_pixel(args->fract, args->start, args->end);
+	pthread_exit(NULL);
 }
 
-t_thread_args *create_args(t_fract *fract, t_pixel *start, t_pixel *end)
+t_thread_args *create_args(t_fract *fract, t_pixel start, t_pixel end)
 {
 	t_thread_args *args;
 
@@ -55,29 +75,28 @@ void fill_black(t_fract *fractal)
 void	*draw_threads(t_fract *fractal)
 {
 	t_thread_args	*args;
-	t_pixel			*start;
-	t_pixel			*end;
-	pthread_t 		id_arr[8];
+	t_pixel			start;
+	t_pixel			end;
+	pthread_t 		id_arr[THREADS];
 	int				i;
 
-	//fill_black(fractal);
+	fill_black(fractal);
 	i = 0;
-	start = create_pixel(0, 0, 0);
-	end = create_pixel(W / 2, H, 0);
-	while (i < 2)
+	start.x = 0;
+	start.y = 0;
+	end.x = W / THREADS;
+	end.y = H;
+	while (i < THREADS)
 	{
+
 		args = create_args(fractal, start, end);
-		pthread_create(&(id_arr[0]), NULL, &calculate_zone_thread, args);
-		printf("start: x: %d, y: %d, end: x: %d, y: %d\n", start->x, start->y, end->x, end->y);
-		start = create_pixel(end->x, 0, 0);
-		end = create_pixel(end->x + W / 2, H, 0);
-		//start->x = end->x;
-		//end->x += W / 8;
+		pthread_create(&(id_arr[i]), NULL, &calculate_zone_thread, args);
+		start.x = end.x;
+		end.x = end.x + W / THREADS;
 		i++;
 	}
-
 	i = 0;
-	while (i < 2)
+	while (i < THREADS)
 	{
 		pthread_join(id_arr[i], NULL);
 		i++;

@@ -15,7 +15,7 @@
                 "kind": "test",
                 "isDefault": true
             },
-            "args": ["mandelbroot"],
+            "args": ["julia"],
             "type": "shell",
             "dependsOn": "build",
             "command": "./fractol"
