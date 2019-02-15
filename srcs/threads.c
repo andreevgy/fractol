@@ -6,43 +6,45 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 13:07:47 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/12 20:35:13 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/15 15:11:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
-
-void calculate_each_pixel(t_fract *fract, t_pixel start, t_pixel end)
+void			fill_black(t_fract *fractal, t_pixel start, t_pixel end)
 {
-	t_pixel *iter;
+	int		bits_per_pixel;
+	int		endian;
+	t_pixel	iter;
 
-	iter = create_pixel(start.x, start.y, 0);
-	while (iter->y < end.y)
+	fractal->data_addr = mlx_get_data_addr(fractal->img_ptr, &bits_per_pixel,
+			&(fractal->size_line), &endian);
+	iter.y = start.y;
+	while (iter.y < end.y)
 	{
-		iter->x = start.x;
-		while (iter->x < end.x)
+		iter.x = start.x;
+		while (iter.x < end.x)
 		{
-			calculate_pixel(fract, fract->calc, *iter);
-			iter->x++;
+			set_pixel_to_image(fractal->data_addr, fractal->size_line, iter);
+			fractal->pixels[iter.y][iter.x] = -1;
+			iter.x++;
 		}
-		iter->y++;
+		iter.y++;
 	}
 }
 
-
-void	*calculate_zone_thread(void *param)
+void			*calculate_zone_thread(void *param)
 {
 	t_thread_args *args;
 
 	args = (t_thread_args *)param;
+	fill_black(args->fract, args->start, args->end);
 	calculate_zone(args->fract, args->start, args->end);
-	//calculate_each_pixel(args->fract, args->start, args->end);
 	pthread_exit(NULL);
 }
 
-t_thread_args *create_args(t_fract *fract, t_pixel start, t_pixel end)
+t_thread_args	*create_args(t_fract *fract, t_pixel start, t_pixel end)
 {
 	t_thread_args *args;
 
@@ -53,34 +55,14 @@ t_thread_args *create_args(t_fract *fract, t_pixel start, t_pixel end)
 	return (args);
 }
 
-void fill_black(t_fract *fractal)
-{
-	int bits_per_pixel;
-	int endian;
-	int i;
-	int end;
-	int	*data_addr;
-
-	fractal->data_addr = mlx_get_data_addr(fractal->img_ptr, &bits_per_pixel,
-			&(fractal->size_line), &endian);
-	data_addr = (int *)fractal->data_addr;
-	i = -1;
-	end = W * H * bits_per_pixel / 32;
-	while (++i < end - 1)
-	{
-		data_addr[i] = 0;
-	}
-}
-
-void	*draw_threads(t_fract *fractal)
+void			*draw_threads(t_fract *fractal)
 {
 	t_thread_args	*args;
 	t_pixel			start;
 	t_pixel			end;
-	pthread_t 		id_arr[THREADS];
+	pthread_t		id_arr[THREADS];
 	int				i;
 
-	fill_black(fractal);
 	i = 0;
 	start.x = 0;
 	start.y = 0;
@@ -88,18 +70,14 @@ void	*draw_threads(t_fract *fractal)
 	end.y = H;
 	while (i < THREADS)
 	{
-
 		args = create_args(fractal, start, end);
 		pthread_create(&(id_arr[i]), NULL, &calculate_zone_thread, args);
 		start.x = end.x;
 		end.x = end.x + W / THREADS;
 		i++;
 	}
-	i = 0;
-	while (i < THREADS)
-	{
+	i = -1;
+	while (++i < THREADS)
 		pthread_join(id_arr[i], NULL);
-		i++;
-	}
 	return (NULL);
 }
