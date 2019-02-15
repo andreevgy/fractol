@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmacgyve <fmacgyve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/12 13:07:47 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/15 15:11:22 by marvin           ###   ########.fr       */
+/*   Created: 2019/02/12 13:07:47 by fmacgyve          #+#    #+#             */
+/*   Updated: 2019/02/15 20:17:36 by fmacgyve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void			fill_black(t_fract *fractal, t_pixel start, t_pixel end)
 	t_pixel	iter;
 
 	fractal->data_addr = mlx_get_data_addr(fractal->img_ptr, &bits_per_pixel,
-			&(fractal->size_line), &endian);
+		&(fractal->size_line), &endian);
 	iter.y = start.y;
 	while (iter.y < end.y)
 	{
@@ -48,7 +48,7 @@ t_thread_args	*create_args(t_fract *fract, t_pixel start, t_pixel end)
 {
 	t_thread_args *args;
 
-	args = ft_memalloc(sizeof(t_thread_args));
+	NULL_CHECK((args = ft_memalloc(sizeof(t_thread_args))));
 	args->fract = fract;
 	args->start = start;
 	args->end = end;
@@ -63,18 +63,17 @@ void			*draw_threads(t_fract *fractal)
 	pthread_t		id_arr[THREADS];
 	int				i;
 
-	i = 0;
+	i = -1;
 	start.x = 0;
 	start.y = 0;
-	end.x = W / THREADS;
+	end.x = W / THREADS + 1;
 	end.y = H;
-	while (i < THREADS)
+	while (++i < THREADS)
 	{
 		args = create_args(fractal, start, end);
 		pthread_create(&(id_arr[i]), NULL, &calculate_zone_thread, args);
 		start.x = end.x;
 		end.x = end.x + W / THREADS;
-		i++;
 	}
 	i = -1;
 	while (++i < THREADS)

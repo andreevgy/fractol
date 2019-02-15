@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: fmacgyve <fmacgyve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/01/08 17:22:13 by marvin            #+#    #+#              #
-#    Updated: 2019/02/15 15:55:17 by marvin           ###   ########.fr        #
+#    Created: 2019/01/08 17:22:13 by fmacgyve          #+#    #+#              #
+#    Updated: 2019/02/15 20:42:02 by fmacgyve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = fractol
-FLAGS       = -Wall -Wextra -Werror -O3
+FLAGS       = -Wall -Wextra -Werror
 SRC_DIR		= ./srcs
 OBJ_DIR		= ./obj
-CFILES		= main.c fractol_struct.c image.c draw_fract.c hooks.c fractals.c calculate_zone.c threads.c calculate_utils.c
+CFILES		= main.c fractol_struct.c image.c hooks.c fractals.c calculate_zone.c threads.c calculate_utils.c color.c
 OFILES		= $(CFILES:.c=.o)
 RAW_CFILES	= $(addprefix $(SRC_DIR)/,$(CFILES))
 RAW_OFILES	= $(addprefix $(OBJ_DIR)/,$(OFILES))

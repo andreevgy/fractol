@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_zone.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmacgyve <fmacgyve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/09 16:00:42 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/15 15:46:47 by marvin           ###   ########.fr       */
+/*   Created: 2019/02/09 16:00:42 by fmacgyve          #+#    #+#             */
+/*   Updated: 2019/02/15 20:23:35 by fmacgyve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	fill_zone(t_fract *fractal, t_pixel start, t_pixel end)
 	i = 0;
 	iter.x = start.x;
 	iter.y = start.y;
-	i = fractal->calc(iter, fractal->zoom, fractal->max_iters, fractal->move);
-	iter.color = hsv(i % 60 + 240, i % 255, 100 * (i < fractal->max_iters));
+	i = fractal->calc(iter, fractal);
+	iter.color = calculate_color(fractal, i);
 	while (iter.y < end.y)
 	{
 		iter.x = start.x;
